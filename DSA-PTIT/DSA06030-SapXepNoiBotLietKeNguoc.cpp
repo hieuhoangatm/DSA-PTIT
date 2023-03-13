@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-
-vector<string> v;
+vector<int> v[100];
+int dem=0;
 bool check(int a[], int n){
 	for(int i=1;i<n;i++){
 		if(a[i] < a[i-1]) return 0;
@@ -19,12 +19,8 @@ void sapxep(int a[], int n){
 			}
 		}
 		if(ok) break;
-		string s="";	
-		for(int k=0;k<n;k++){
-			s+= to_string(a[k]);
-		}
-		v.push_back(s);
-		s="";
+		for(int k=0;k<n;k++) v[i].push_back(a[k]);
+		dem++;
 	}
 }
 
@@ -42,12 +38,17 @@ main(){
 			cout << endl;
 		}else{
 	    	sapxep(a,n);
-	    	for(int i=v.size()-1;i>=0;i--){
-	    		cout << "Buoc " << i+1 <<": ";
-	    		string x=v[i];
-	    		for(int j=0;j<x.size();j++) cout << x[j] << " ";
+	    	int m=dem;
+	    	for(int i=m-1;i>=0;i--){
+	    		cout << "Buoc "<<dem << ": ";
+	    		for(int j=0;j<v[i].size();j++) cout << v[i][j] << " ";
 	    		cout << endl;
-	    	}
+	    		dem--;
+			}
+			dem=0;
+			for(int i=0;i<100;i++){
+				v[i].clear();
+			}
 		}
     }	
 }
